@@ -2,7 +2,7 @@ FROM alpine:latest
 
 LABEL maintainer "LJason <https://ljason.cn>"
 
-RUN apk add --no-cache git build-base openssl python \
+RUN apk add --no-cache git build-base openssl python libsodium \
 	&& git clone --depth 1 https://github.com/Kry4tal/shadowsocksr.git /shadowsocksr \
 	&& wget https://github.com/jech/polipo/archive/master.zip -O polipo.zip \
 	&& unzip polipo.zip \

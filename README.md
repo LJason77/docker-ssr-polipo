@@ -60,7 +60,7 @@ docker pull ljason/docker-ssr-polipo
 
 ```bash
 # 方法一安装
-docker run -d --restart always --name docker-ssr-polipo -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host docker-ssr-polipo
+docker run -d --restart always --name ssr -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host docker-ssr-polipo
 # 方法二安装
-docker run -d --restart always --name docker-ssr-polipo -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host ljason/docker-ssr-polipo
+docker run -d --restart always --name ssr -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host ljason/docker-ssr-polipo
 ```

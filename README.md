@@ -1,22 +1,24 @@
 # 科学上网容器 #
 
-基于最新的 alpine 镜像，使用最后一版的 SSR 和 最新的 polipo。
+基于最新的 alpine 镜像，使用最后一版的 SSR。
 
-## 端口流量类型 ##
+## 端口说明 ##
 
-|  类型  | 端口 |
-| :----: | :--: |
-| socks5 | 1080 |
-|  http  | 8123 |
+|  类型  | 端口 |     说明     |
+| :----: | :--: | :----------: |
+| socks5 | 1080 |   SSR 端口   |
+|  http  | 8118 | Privoxy 端口 |
+|  http  | 8123 | Polipo 端口  |
 
 ## 使用 ##
 
-* 如需使用 socks5 类型的流量，则代理 `127.0.0.1:1080`
-* 如需使用 http 类型的流量，则代理 `127.0.0.1:8123`
+* 如需 socks5 类型的代理，则使用 `127.0.0.1:1080` （全局）
+* 如需根据规则使用 http 类型的代理，则使用 `127.0.0.1:8118`
+* 如需全局使用 http 类型的流量，则代理 `127.0.0.1:8123`
 
 ## 配置 ##
 
-创建 json 文件，如： shadowsocks.json，写上自己的配置：
+创建 json 文件，如： shadowsocks.json，写上自己的配置，比如：
 
 ```json
 {
@@ -39,6 +41,7 @@
 
 **注意：** `local_address` 和 `local_port` 必须要是 **0.0.0.0** 和 **1080**。
 
+Privoxy 的规则文件是 [gfw.action](./files/gfw.action)，可自行添加规则。
 
 ## 安装 ##
 
@@ -47,7 +50,7 @@
 ```bash
 git clone https://github.com/LJason77/docker-ssr-polipo.git
 cd docker-ssr-polipo
-docker build -t docker-ssr-polipo .
+docker build -t ssr .
 ```
 
 ### 方法二 ###
@@ -60,7 +63,7 @@ docker pull ljason/docker-ssr-polipo
 
 ```bash
 # 方法一安装
-docker run -d --restart always --name ssr -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host docker-ssr-polipo
+docker run -d --restart always --name ssr -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host ssr
 # 方法二安装
 docker run -d --restart always --name ssr -v /your/path/shadowsocks.json:/etc/shadowsocks.json --network host ljason/docker-ssr-polipo
 ```
